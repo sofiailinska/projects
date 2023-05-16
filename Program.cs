@@ -1,25 +1,60 @@
 ﻿using System;
-class program
+
+class GFG
 {
-    public static void Main(string[] args)
+    
+    static void sort012(int[] a, int arr_size)
     {
-        Console.OutputEncoding = System.Text.Encoding.GetEncoding(1251);
-        Console.WriteLine("Введіть ціле число x>1: ");
-        int x = Convert.ToInt32(Console.ReadLine());
-        if (x > 1)
+        int lo = 0;
+        int hi = arr_size - 1;
+        int mid = 0, temp = 0;
+        
+        while (mid <= hi)
         {
-            int sum = 0;
-            while (x != 0)
+            switch (a[mid])
             {
-                sum += x % 10;
-                x /= 10;
+                
+                case 0:
+                    {
+                        temp = a[lo];
+                        a[lo] = a[mid];
+                        a[mid] = temp;
+                        lo++;
+                        mid++;
+                        break;
+                    }
+                
+                case 1:
+                    mid++;
+                    break;
+                
+                case 2:
+                    {
+                        temp = a[mid];
+                        a[mid] = a[hi];
+                        a[hi] = temp;
+                        hi--;
+                        break;
+                    }
             }
-            Console.WriteLine("Найменше натуральне число: " + sum);
         }
-        else
-        {
-            Console.WriteLine("Помилка, число повинно бути x>1");
-        }
-        Console.ReadLine();
+    }
+
+    static void printArray(int[] arr, int arr_size)
+    {
+        int i;
+
+        for (i = 0; i < arr_size; i++)
+            Console.Write(arr[i] + " ");
+        Console.WriteLine("");
+    }
+
+    public static void Main()
+    {
+        int[] arr = { 0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1 };
+        int arr_size = arr.Length;
+        sort012(arr, arr_size);
+
+        printArray(arr, arr_size);
     }
 }
